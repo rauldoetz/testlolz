@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cozinha do Chef v9.0 | Mascotes Originais, Fusão & Império Gastronômico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="cc-pagina" data-cc-tema="claro" data-cc-estab="barraca" data-cc-decor="classico">
+
+    <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo-container">
+            <span class="header-logo-selo" title="Cozinha do Chef v9.0" aria-label="Logo Cozinha do Chef">
+                <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+            </span>
+            <div>
+                <h1 class="main-title">Cozinha do Chef <small style="font-size:0.82rem; opacity:0.75;">v9.0</small></h1>
+                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:3px;">
+                    <span id="cc-estab-header" class="cc-estab-pill"><i class="fa-solid fa-store"></i> Barraca de Comida</span>
+                    <span id="cc-spec-header" class="cc-estab-pill" style="border-color:var(--estrela); color:var(--estrela);"><i class="fa-solid fa-compass"></i> Sem Especialização</span>
+                    <span id="cc-franquia-header" class="cc-estab-pill" style="border-color:#7c3aed; color:#7c3aed;"><i class="fa-solid fa-earth-americas"></i> 0 Franquias</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-acoes">
+            <select id="cc-tema" class="cc-select-tema" aria-label="Tema visual">
+                <option value="claro">Tema: Claro</option>
+                <option value="noturno">Tema: Noturno</option>
+                <option value="retro">Tema: Retrô</option>
+            </select>
+            <button type="button" id="cc-anim-btn" class="cc-btn-som" aria-pressed="true" title="Alternar animações visuais">
+                <i class="fa-solid fa-wand-sparkles" aria-hidden="true"></i> Efeitos: On
+            </button>
+            <button type="button" id="cc-som-btn" class="cc-btn-som" aria-pressed="true">
+                <i class="fa-solid fa-volume-high" aria-hidden="true"></i> Som: Ligado
+            </button>
+        </div>
+    </header>
+
+    <main id="conteudo" tabindex="-1" class="cc-main">
+
+        <!-- Tutorial Inicial Guiado -->
+        <div id="cc-tutorial-banner" class="cc-tutorial-banner" hidden></div>
+
+        <!-- Evento Aleatório Dinâmico -->
+        <div id="cc-evento-aleatorio-banner" class="cc-evento-aleatorio-banner" hidden></div>
+
+        <!-- Banner Evento Sazonal & Temporada -->
+        <div id="cc-evento-banner" class="cc-evento-banner"></div>
+
+        <!-- Banner Modo Desafio Ativo -->
+        <div id="cc-desafio-ativo-banner" class="cc-desafio-ativo-banner" hidden></div>
+
+        <!-- Banner Frenesi -->
+        <div id="cc-frenesi-banner" class="cc-frenesi-banner" hidden></div>
+
+        <!-- Banner Boss Fight / Campeonato -->
+        <div id="cc-boss-banner" class="cc-boss-banner" hidden>
+            <div class="cc-boss-topo">
+                <h3 id="cc-boss-titulo"><i class="fa-solid fa-skull"></i> DESAFIO DE CRÍTICO!</h3>
+                <strong id="cc-boss-tempo" style="font-size:1.15rem; color:#fef08a;">30.0s</strong>
+            </div>
+            <p id="cc-boss-desc" style="margin:0 0 8px; font-size:0.95rem;"></p>
+            <div class="cc-boss-barra">
+                <div id="cc-boss-barra-cheia" class="cc-boss-barra-cheia"></div>
+            </div>
+        </div>
+
+        <!-- Placar -->
+        <section class="cc-status" aria-label="Seu progresso">
+            <div class="cc-card-status">
+                <span class="cc-rotulo">Moedas</span>
+                <strong id="cc-moedas">0</strong>
+            </div>
+            <div class="cc-card-status">
+                <span class="cc-rotulo">Ganho por toque</span>
+                <strong id="cc-clique">1</strong>
+            </div>
+            <div class="cc-card-status">
+                <span class="cc-rotulo">Ganho por segundo</span>
+                <strong id="cc-segundo">0</strong>
+            </div>
+            <div class="cc-card-status cc-card-reputacao">
+                <span class="cc-rotulo">Reputação & Gorjeta</span>
+                <strong id="cc-reputacao-placar">1.0 ★ (+0%)</strong>
+            </div>
+            <div class="cc-card-status cc-card-prestigio">
+                <span class="cc-rotulo">Estrelas de Prestígio</span>
+                <strong id="cc-estrelas-placar">0 ★</strong>
+            </div>
+        </section>
+
+        <!-- NAVEGAÇÃO HIERÁRQUICA POR CATEGORIAS -->
+        <nav class="cc-nav-v7" aria-label="Navegação principal do jogo">
+            <div class="cc-nav-grupos" role="group" aria-label="Categorias de menu">
+                <button type="button" class="cc-nav-grupo-btn" data-nav-grupo="jogar" aria-expanded="true">
+                    <i class="fa-solid fa-fire-burner"></i> Jogar <span class="cc-kbd">1</span>
+                </button>
+                <button type="button" class="cc-nav-grupo-btn" data-nav-grupo="gerenciar" aria-expanded="false">
+                    <i class="fa-solid fa-shop"></i> Gerenciar & Franquias <span class="cc-kbd">2</span>
+                </button>
+                <button type="button" class="cc-nav-grupo-btn" data-nav-grupo="progressao" aria-expanded="false">
+                    <i class="fa-solid fa-trophy"></i> Progressão <span class="cc-kbd">3</span>
+                </button>
+                <button type="button" class="cc-nav-grupo-btn" data-nav-grupo="colecao" aria-expanded="false">
+                    <i class="fa-solid fa-paw"></i> Chef, Mascotes & Caixas <span class="cc-kbd">4</span>
+                </button>
+                <button type="button" class="cc-nav-grupo-btn" data-nav-grupo="sistema" aria-expanded="false">
+                    <i class="fa-solid fa-gear"></i> Sistema <span class="cc-kbd">5</span>
+                </button>
+            </div>
+
+            <div class="cc-abas" role="tablist" aria-label="Telas da categoria">
+                <!-- Grupo JOGAR -->
+                <button type="button" role="tab" id="tab-cozinhar" data-grupo-pai="jogar" class="cc-aba" aria-controls="aba-cozinhar" aria-selected="true">
+                    <i class="fa-solid fa-bowl-food"></i> Cozinhar & Salão
+                </button>
+                <button type="button" role="tab" id="tab-pedidos" data-grupo-pai="jogar" class="cc-aba" aria-controls="aba-pedidos" aria-selected="false" tabindex="-1">
+                    <i class="fa-solid fa-clipboard-check"></i> Pedidos, Missões & Desafios
+                </button>
+                <button type="button" role="tab" id="tab-campeonatos" data-grupo-pai="jogar" class="cc-aba" aria-controls="aba-campeonatos" aria-selected="false" tabindex="-1">
+                    <i class="fa-solid fa-medal"></i> Campeonatos & Rivais
+                </button>
+
+                <!-- Grupo GERENCIAR -->
+                <button type="button" role="tab" id="tab-restaurante" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-restaurante" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-building"></i> Restaurante & Estilo
+                </button>
+                <button type="button" role="tab" id="tab-franquias" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-franquias" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-earth-americas"></i> Franquias (Endgame)
+                </button>
+                <button type="button" role="tab" id="tab-equipe" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-equipe" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-users"></i> Equipe & Sinergias
+                </button>
+                <button type="button" role="tab" id="tab-melhorias" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-melhorias" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-arrow-trend-up"></i> Melhorias & Equipamentos
+                </button>
+                <button type="button" role="tab" id="tab-fornecedores" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-fornecedores" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-truck-field"></i> Fornecedores
+                </button>
+                <button type="button" role="tab" id="tab-decoracao" data-grupo-pai="gerenciar" class="cc-aba" aria-controls="aba-decoracao" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-couch"></i> Decoração
+                </button>
+
+                <!-- Grupo PROGRESSÃO -->
+                <button type="button" role="tab" id="tab-bestiario" data-grupo-pai="progressao" class="cc-aba" aria-controls="aba-bestiario" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-book-open"></i> Livro & Secretas
+                </button>
+                <button type="button" role="tab" id="tab-temporada" data-grupo-pai="progressao" class="cc-aba" aria-controls="aba-temporada" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-calendar-star"></i> Temporada
+                </button>
+                <button type="button" role="tab" id="tab-prestigio" data-grupo-pai="progressao" class="cc-aba" aria-controls="aba-prestigio" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-star"></i> Prestígio
+                </button>
+                <button type="button" role="tab" id="tab-conquistas" data-grupo-pai="progressao" class="cc-aba" aria-controls="aba-conquistas" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-trophy"></i> Conquistas
+                </button>
+                <button type="button" role="tab" id="tab-stats" data-grupo-pai="progressao" class="cc-aba" aria-controls="aba-stats" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-chart-line"></i> Estatísticas & História
+                </button>
+
+                <!-- Grupo COLEÇÃO -->
+                <button type="button" role="tab" id="tab-chef" data-grupo-pai="colecao" class="cc-aba" aria-controls="aba-chef" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-shirt"></i> Meu Chef & Loja Diária
+                </button>
+                <button type="button" role="tab" id="tab-mascotes" data-grupo-pai="colecao" class="cc-aba" aria-controls="aba-mascotes" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-paw"></i> Mascotes da Cozinha
+                </button>
+                <button type="button" role="tab" id="tab-caixas" data-grupo-pai="colecao" class="cc-aba" aria-controls="aba-caixas" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-gift"></i> Caixas & Fusão
+                </button>
+
+                <!-- Grupo SISTEMA -->
+                <button type="button" role="tab" id="tab-ajuda" data-grupo-pai="sistema" class="cc-aba" aria-controls="aba-ajuda" aria-selected="false" tabindex="-1" hidden>
+                    <i class="fa-solid fa-circle-question"></i> Ajuda, Atalhos & Patch Notes
+                </button>
+            </div>
+        </nav>
+
+        <!-- ==================== GRUPO: JOGAR ==================== -->
+
+        <!-- 1. Cozinhar & Salão de Clientes -->
+        <section id="aba-cozinhar" role="tabpanel" aria-labelledby="tab-cozinhar" class="cc-painel">
+            <h2 class="titulo-pagina">Cozinhar & Salão</h2>
+            <div class="cc-ritmo-box" aria-label="Combo e desafios rápidos">
+                <div>
+                    <span>Combo: </span>
+                    <strong id="cc-combo-texto" class="cc-combo-tag">x1.0 (0 seguidos)</strong>
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <button type="button" id="cc-risco-btn" class="cc-risco-btn">
+                        <i class="fa-solid fa-flame"></i> Pedido Relâmpago (3x) <span class="cc-kbd">R</span>
+                    </button>
+                    <button type="button" id="cc-ponto-btn" class="cc-risco-btn">
+                        <i class="fa-solid fa-fire-burner"></i> Ponto da Carne (5x) <span class="cc-kbd">P</span>
+                    </button>
+                    <button type="button" id="cc-boss-btn" class="cc-risco-btn cc-boss-btn">
+                        <i class="fa-solid fa-gavel"></i> Desafiar Crítico (Boss) <span class="cc-kbd">B</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="cc-cozinha">
+                <div class="cc-palco-wrapper">
+                    <div id="cc-avatar-palco" class="cc-avatar" role="img" aria-label="Seu chef"></div>
+                    <div id="cc-mascote-palco-box"></div>
+                    <p id="cc-bonus-palco" class="cc-bonus"></p>
+                    <p id="cc-set-palco" class="cc-texto" style="font-weight:700; color:var(--estrela);"></p>
+                </div>
+                <div class="cc-acao">
+                    <div class="cc-botao-area">
+                        <button type="button" id="cc-cozinhar" class="cc-botao-grande">
+                            <i class="fa-solid fa-bowl-food"></i>
+                            <span>Cozinhar!</span>
+                            <small>Toque aqui ou pressione <span class="cc-kbd" style="color:#111827;">Espaço</span> / <span class="cc-kbd" style="color:#111827;">C</span></small>
+                        </button>
+                        <div id="cc-flutuantes" class="cc-flutuantes" aria-hidden="true"></div>
+                    </div>
+                    <p id="cc-aviso" class="cc-aviso" role="status" aria-live="polite"></p>
+
+                    <!-- Receita em Preparo -->
+                    <div class="cc-painel-prato">
+                        <div class="cc-prato-topo">
+                            <label for="cc-prato-select" style="font-weight:800;"><i class="fa-solid fa-utensils"></i> Receita em preparo:</label>
+                            <select id="cc-prato-select" class="cc-prato-select"></select>
+                        </div>
+                        <p id="cc-prato-desc" style="margin:0 0 8px; font-size:0.92rem; color:var(--texto-suave);"></p>
+                        <div class="cc-barra" role="progressbar" aria-label="Progresso do prato atual" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div id="cc-prato-barra" class="cc-barra-cheia" style="background: var(--estrela);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Próxima Melhoria & Atalho Rápido -->
+                    <div class="cc-meta">
+                        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px;">
+                            <p id="cc-meta-texto" style="margin:0;"></p>
+                            <button type="button" id="cc-comprar-barato-btn" class="cc-btn cc-btn-claro cc-btn-pequeno" style="margin:0;">
+                                <i class="fa-solid fa-bolt"></i> Comprar Mais Barata <span class="cc-kbd">V</span>
+                            </button>
+                        </div>
+                        <div class="cc-barra" role="progressbar" aria-label="Progresso para a próxima melhoria" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div id="cc-meta-barra" class="cc-barra-cheia"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salão de Clientes Ativos -->
+            <div style="margin-top:22px; padding-top:16px; border-top:1.5px solid var(--borda-forte);">
+                <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px;">
+                    <h3 style="margin:0;"><i class="fa-solid fa-people-group"></i> Salão de Clientes Ativos</h3>
+                    <button type="button" id="cc-chamar-cliente-btn" class="cc-btn cc-btn-claro cc-btn-pequeno" style="margin:0;">
+                        <i class="fa-solid fa-bell"></i> Receber Novo Cliente <span class="cc-kbd">N</span>
+                    </button>
+                </div>
+                <p class="cc-texto" style="font-size:0.92rem;">Cada cliente possui perfil, preferência e paciência. Prepare a receita desejada ou atenda no salão para ganhar gorjetas e reputação!</p>
+                <div id="cc-salao-clientes" class="cc-salao-grid"></div>
+            </div>
+        </section>
+
+        <!-- 2. Pedidos Especiais, Missões Diárias & Modo Desafio -->
+        <section id="aba-pedidos" role="tabpanel" aria-labelledby="tab-pedidos" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Pedidos Especiais, Missões Diárias & Modo Desafio</h2>
+            <p class="cc-texto">Cumpra pedidos com avaliações <strong>Bronze, Prata e Ouro</strong>, complete as <strong>3 Missões Diárias</strong> opcionais ou entre em uma partida de <strong>Modo Desafio</strong> com regras especiais!</p>
+
+            <h3><i class="fa-solid fa-calendar-check"></i> Missões Diárias (3 Objetivos Opcionais)</h3>
+            <div id="cc-desafios-diarios-lista" class="cc-grid-cards"></div>
+
+            <h3><i class="fa-solid fa-star-half-stroke"></i> Pedidos Especiais (Avaliação Bronze / Prata / Ouro)</h3>
+            <div id="cc-pedidos-especiais-lista" class="cc-grid-cards"></div>
+
+            <h3><i class="fa-solid fa-stopwatch"></i> Modo Desafio (Partidas Especiais & Recordes)</h3>
+            <p class="cc-texto">Inicie uma rodada cronometrada com condições especiais para bater seu recorde e ganhar bônus permanentes de carreira!</p>
+            <div id="cc-modo-desafio-lista" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 3. Campeonatos & Concorrentes Gastronômicos -->
+        <section id="aba-campeonatos" role="tabpanel" aria-labelledby="tab-campeonatos" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Campeonatos & Concorrentes Gastronômicos</h2>
+            <p class="cc-texto">Enfrente restaurantes rivais em duelos de categoria ou dispute o <strong>Campeonato Gastronômico em 3 etapas</strong> (Classificatórias, Semifinal e Final) para conquistar troféus e bônus permanentes!</p>
+
+            <h3><i class="fa-solid fa-trophy"></i> Campeonato Gastronômico (3 Etapas)</h3>
+            <div id="cc-campeonato-box" class="cc-prestigio-card" style="border-color:var(--verde-700); background:var(--superficie-suave);"></div>
+
+            <h3><i class="fa-solid fa-store-slash"></i> Concorrentes Gastronômicos (Rivais)</h3>
+            <div id="cc-rivais-lista" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- ==================== GRUPO: GERENCIAR ==================== -->
+
+        <!-- 4. Restaurante & Especialização -->
+        <section id="aba-restaurante" role="tabpanel" aria-labelledby="tab-restaurante" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Expansão & Especialização do Restaurante</h2>
+            <p class="cc-texto">Evolua a estrutura física do seu estabelecimento e defina sua <strong>Identidade Gastronômica</strong> para moldar seu estilo de jogo.</p>
+            <p id="cc-restaurante-resumo" class="cc-texto cc-destaque"></p>
+
+            <h3><i class="fa-solid fa-compass"></i> Especialização Gastronômica</h3>
+            <p class="cc-texto">Disponível a partir da <strong>Lanchonete Fixa</strong>. Escolha uma vocação para o restaurante.</p>
+            <div id="cc-especializacoes-lista" class="cc-grid-cards" style="margin-bottom:20px;"></div>
+
+            <h3><i class="fa-solid fa-building"></i> Estágios de Expansão</h3>
+            <div id="cc-lista-estabelecimentos" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 5. Franquias (Endgame) -->
+        <section id="aba-franquias" role="tabpanel" aria-labelledby="tab-franquias" class="cc-painel" hidden>
+            <h2 class="titulo-pagina"><i class="fa-solid fa-earth-americas"></i> Império de Franquias Globais (Endgame)</h2>
+            <p class="cc-texto">Quando seu restaurante atinge o patamar de <strong>Império Gastronômico</strong> (ou via Prestígio), abra filiais e franquias icônicas ao redor do mundo! Cada franquia gera renda passiva massiva, multiplica seus ganhos globais e pode ser aprimorada em múltiplos níveis.</p>
+            <p id="cc-franquias-resumo" class="cc-texto cc-destaque"></p>
+            <div id="cc-franquias-lista" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 6. Equipe & Sinergias -->
+        <section id="aba-equipe" role="tabpanel" aria-labelledby="tab-equipe" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Equipe & Sinergias de Brigada</h2>
+            <p class="cc-texto">Contrate especialistas e combine funções na cozinha para ativar <strong>Sinergias de Equipe</strong> poderosas!</p>
+            <p id="cc-equipe-resumo" class="cc-texto cc-destaque"></p>
+
+            <details class="cc-recolhivel" open>
+                <summary><i class="fa-solid fa-link"></i> Sinergias Ativas & Combinações de Equipe</summary>
+                <div id="cc-sinergias-lista" class="cc-grid-cards" style="margin-top:10px;"></div>
+            </details>
+
+            <h3>Cargos Disponíveis</h3>
+            <div id="cc-lista-equipe" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 7. Melhorias & Equipamentos Aprimoráveis -->
+        <section id="aba-melhorias" role="tabpanel" aria-labelledby="tab-melhorias" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Melhorias & Equipamentos da Cozinha</h2>
+            <p class="cc-texto">Invista em utensílios, ajudantes e <strong>Equipamentos Aprimoráveis</strong> com efeitos funcionais distintos!</p>
+
+            <!-- Barra de Automação & Compra Rápida -->
+            <div class="cc-ritmo-box" style="margin-bottom:16px;">
+                <div>
+                    <strong><i class="fa-solid fa-robot"></i> Auto-compra Inteligente:</strong>
+                    <span style="font-size:0.9rem; color:var(--texto-suave);">Compra automaticamente a melhoria mais barata a cada segundo.</span>
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <button type="button" id="cc-autocompra-btn" class="cc-btn cc-btn-claro cc-btn-pequeno" style="margin:0;" aria-pressed="false">
+                        Auto-compra: Desligada <span class="cc-kbd">A</span>
+                    </button>
+                    <button type="button" id="cc-comprar-barato-upg-btn" class="cc-btn cc-btn-ouro cc-btn-pequeno" style="margin:0;">
+                        <i class="fa-solid fa-bolt"></i> Comprar Mais Barata <span class="cc-kbd">V</span>
+                    </button>
+                </div>
+            </div>
+
+            <h3><i class="fa-solid fa-gears"></i> Equipamentos Aprimoráveis (Efeitos Funcionais)</h3>
+            <div id="cc-equipamentos-lista" class="cc-grid-cards" style="margin-bottom:20px;"></div>
+
+            <h3><i class="fa-solid fa-arrow-trend-up"></i> Melhorias de Produção</h3>
+            <div id="cc-grupos" class="cc-filtros" role="group" aria-label="Tipo de melhoria"></div>
+            <p id="cc-grupo-ajuda" class="cc-texto"></p>
+            <div class="cc-filtros" role="group" aria-label="Quantidade de níveis a comprar de uma vez">
+                <span class="cc-rotulo-filtro">Comprar de cada vez:</span>
+                <button type="button" class="cc-filtro" data-qtd-compra="1" aria-pressed="true">1 nível</button>
+                <button type="button" class="cc-filtro" data-qtd-compra="10" aria-pressed="false">10 níveis</button>
+                <button type="button" class="cc-filtro" data-qtd-compra="100" aria-pressed="false">100 níveis</button>
+                <button type="button" class="cc-filtro" data-qtd-compra="max" aria-pressed="false">Máximo (MAX) <span class="cc-kbd">M</span></button>
+            </div>
+            <div id="cc-lista-upg" class="cc-lista"></div>
+        </section>
+
+        <!-- 8. Fornecedores & Ingredientes -->
+        <section id="aba-fornecedores" role="tabpanel" aria-labelledby="tab-fornecedores" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Fornecedores & Despensa de Ingredientes</h2>
+            <p class="cc-texto">Adquira ingredientes frescos e raros dos produtores locais para turbinar receitas e elevar o nível dos seus fornecedores!</p>
+            <div id="cc-despensa-resumo" class="cc-ritmo-box"></div>
+            <div id="cc-fornecedores-lista" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 9. Decoração & Personalização do Salão -->
+        <section id="aba-decoracao" role="tabpanel" aria-labelledby="tab-decoracao" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Decoração & Ambiente do Restaurante</h2>
+            <p class="cc-texto">Personalize o visual do salão e a fachada. <strong>Aparência é livre:</strong> você pode equipar qualquer tema visual desbloqueado sem perder os bônus!</p>
+            <p id="cc-decoracao-resumo" class="cc-texto cc-destaque"></p>
+            <div id="cc-decoracao-lista" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- ==================== GRUPO: PROGRESSÃO ==================== -->
+
+        <!-- 10. Livro de Receitas Secretas & Coleção de Pratos -->
+        <section id="aba-bestiario" role="tabpanel" aria-labelledby="tab-bestiario" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Livro de Receitas, Secretas & Categorias</h2>
+            <p class="cc-texto">Galeria visual de pratos, maestrias e <strong>Receitas Secretas</strong> desbloqueadas por marcos culinários!</p>
+            <p id="cc-bestiario-resumo" class="cc-texto cc-destaque"></p>
+
+            <div class="cc-filtros">
+                <input type="search" id="cc-busca-receita" class="cc-input" placeholder="Pesquisar receita por nome..." aria-label="Pesquisar receita por nome">
+                <button type="button" class="cc-filtro" data-filtro-cat="todas" aria-pressed="true">Todas</button>
+                <button type="button" class="cc-filtro" data-filtro-cat="secretas" aria-pressed="false">Secretas 🔒</button>
+            </div>
+
+            <details class="cc-recolhivel">
+                <summary><i class="fa-solid fa-layer-group"></i> Ver Progresso por Categoria Culinária</summary>
+                <div id="cc-categorias-resumo" class="cc-grid-cards" style="margin-top:12px;"></div>
+            </details>
+
+            <h3>Catálogo de Receitas & Pratos Secretos</h3>
+            <div id="cc-lista-bestiario" class="cc-grade-bestiario"></div>
+        </section>
+
+        <!-- 11. Temporada & Evento Sazonal -->
+        <section id="aba-temporada" role="tabpanel" aria-labelledby="tab-temporada" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Temporada & Evento Sazonal</h2>
+            <p class="cc-texto">Acompanhe o <strong>Evento Sazonal</strong> ativo e avance na <strong>Trilha da Temporada</strong> no seu ritmo para resgatar recompensas.</p>
+            <div id="cc-evento-detalhe" class="cc-prestigio-card" style="border-color:#2563eb; background:var(--superficie-suave);"></div>
+            <h3>Trilha de Objetivos da Temporada</h3>
+            <div id="cc-lista-temporada" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 12. Prestígio -->
+        <section id="aba-prestigio" role="tabpanel" aria-labelledby="tab-prestigio" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Prestígio, Marcos & Árvore Estrelada</h2>
+            <p class="cc-texto">Reinicie suas moedas e melhorias para ganhar <strong>Estrelas de Prestígio</strong>, alcançar <strong>Marcos de Carreira</strong> e investir na Árvore Permanente.</p>
+            <div class="cc-prestigio-card">
+                <div class="cc-prestigio-grid">
+                    <div class="cc-prestigio-box">
+                        <span>Estrelas disponíveis</span>
+                        <strong id="cc-prest-atuais">0 ★</strong>
+                    </div>
+                    <div class="cc-prestigio-box">
+                        <span>Bônus passivo de estrelas</span>
+                        <strong id="cc-prest-bonus">+0%</strong>
+                    </div>
+                    <div class="cc-prestigio-box">
+                        <span>Estrelas ao prestigiar agora</span>
+                        <strong id="cc-prest-ganhar">+0 ★</strong>
+                    </div>
+                </div>
+                <p id="cc-prest-requisito" class="cc-texto cc-destaque"></p>
+                <ul class="cc-prestigio-regras">
+                    <li>Cada Estrela não gasta no banco dá <strong>+15% de bônus permanente</strong> (ou +25% com talento).</li>
+                    <li><strong>O que reinicia:</strong> moedas atuais, receitas na temporada e níveis das melhorias comuns.</li>
+                    <li><strong>O que mantém:</strong> restaurante, franquias, mascotes, especialização, decoração, equipamentos, equipe, fornecedores, roupas, maestrias, reputação, troféus e árvore estrelada.</li>
+                </ul>
+                <button type="button" id="cc-btn-prestigiar" class="cc-btn cc-btn-ouro" disabled>Fazer Prestígio agora</button>
+            </div>
+
+            <div class="cc-arvore-container">
+                <h3 style="margin-top:0;"><i class="fa-solid fa-medal"></i> Marcos de Prestígio</h3>
+                <div id="cc-marcos-prestigio" class="cc-grid-cards"></div>
+            </div>
+
+            <div class="cc-arvore-container">
+                <h3 style="margin-top:0;"><i class="fa-solid fa-sitemap"></i> Árvore de Talentos Estrelados (20 Talentos em 4 Ramos)</h3>
+                <div id="cc-arvore-ramos" class="cc-arvore-ramos"></div>
+            </div>
+        </section>
+
+        <!-- 13. Conquistas -->
+        <section id="aba-conquistas" role="tabpanel" aria-labelledby="tab-conquistas" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Conquistas & Conquistas Secretas</h2>
+            <p class="cc-texto">Complete metas de carreira e descubra conquistas secretas escondidas pelo restaurante.</p>
+            <p id="cc-conquistas-resumo" class="cc-texto cc-destaque"></p>
+            <div class="cc-filtros">
+                <button type="button" class="cc-filtro" data-filtro-conq="todas" aria-pressed="true">Todas</button>
+                <button type="button" class="cc-filtro" data-filtro-conq="concluidas" aria-pressed="false">Concluídas</button>
+                <button type="button" class="cc-filtro" data-filtro-conq="pendentes" aria-pressed="false">Pendentes</button>
+            </div>
+            <div id="cc-lista-conquistas" class="cc-grade-conquistas"></div>
+        </section>
+
+        <!-- 14. Estatísticas, Recordes & História -->
+        <section id="aba-stats" role="tabpanel" aria-labelledby="tab-stats" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Estatísticas, Gráfico de Desempenho & História</h2>
+            <p class="cc-texto">Acompanhe seus números históricos, evolução de moedas por minuto, capítulos da sua história e o registro de reputação.</p>
+
+            <div id="cc-stats-grid" class="cc-stats-grid"></div>
+
+            <h3><i class="fa-solid fa-chart-column"></i> Evolução de Produção Recente</h3>
+            <div id="cc-grafico-producao" class="cc-grafico-box"></div>
+
+            <h3><i class="fa-solid fa-book-bookmark"></i> História do Restaurante (Capítulos Desbloqueáveis)</h3>
+            <div id="cc-historia-lista" class="cc-grid-cards"></div>
+
+            <details class="cc-recolhivel">
+                <summary><i class="fa-solid fa-clock-rotate-left"></i> Histórico Recente de Reputação</summary>
+                <ul id="cc-historico-rep-lista" class="cc-passos" style="margin-top:10px;"></ul>
+            </details>
+        </section>
+
+        <!-- ==================== GRUPO: COLEÇÃO ==================== -->
+
+        <!-- 15. Meu Chef & Loja Diária -->
+        <section id="aba-chef" role="tabpanel" aria-labelledby="tab-chef" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Meu Chef, Conjuntos & Loja Diária</h2>
+            <div class="cc-chef">
+                <div class="cc-chef-previa">
+                    <div id="cc-avatar-grande" class="cc-avatar" role="img" aria-label="Prévia do seu chef"></div>
+                    <p id="cc-bonus-chef" class="cc-bonus"></p>
+                    <p id="cc-colecao-chef" class="cc-texto"></p>
+                    <details class="cc-recolhivel" open>
+                        <summary><i class="fa-solid fa-sparkles"></i> Conjuntos Especiais</summary>
+                        <div id="cc-sets-lista" class="cc-sets-lista"></div>
+                    </details>
+                </div>
+                <div class="cc-chef-escolha">
+                    <div class="cc-loja-diaria-box">
+                        <h3 style="margin-top:0;"><i class="fa-solid fa-store"></i> Vitrine Diária Rotativa</h3>
+                        <p class="cc-texto" style="margin-top:0; font-size:0.9rem;">Itens exclusivos disponíveis hoje para compra direta sem depender de sorteio!</p>
+                        <div id="cc-loja-diaria-lista" class="cc-grid-cards"></div>
+                    </div>
+
+                    <p class="cc-texto">1. Escolha a parte do corpo. 2. Escolha o modelo. 3. Escolha a cor.</p>
+                    <div id="cc-cats" class="cc-filtros" role="group" aria-label="Parte do corpo"></div>
+                    <div id="cc-modelos" class="cc-modelos"></div>
+                    <div id="cc-cores-bloco" class="cc-cores-bloco"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 16. Mascotes da Cozinha (TODAS AS RARIDADES) -->
+        <section id="aba-mascotes" role="tabpanel" aria-labelledby="tab-mascotes" class="cc-painel" hidden>
+            <h2 class="titulo-pagina"><i class="fa-solid fa-paw"></i> Mascotes da Cozinha</h2>
+            <p class="cc-texto">Colecione companheiros exclusivos da nossa cozinha! Todos os mascotes desbloqueados concedem <strong>bônus passivos de coleção</strong>, e o mascote equipado no salão ativa um <strong>poder especial dobrado</strong>!</p>
+            <p id="cc-mascotes-resumo" class="cc-texto cc-destaque"></p>
+            <div class="cc-filtros" role="group" aria-label="Filtrar mascotes por raridade">
+                <button type="button" class="cc-filtro" data-filtro-masc="todas" aria-pressed="true">Todas as Raridades</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="comum" aria-pressed="false">Comum</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="incomum" aria-pressed="false">Incomum</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="raro" aria-pressed="false">Raro</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="epico" aria-pressed="false">Épico</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="lendario" aria-pressed="false">Lendário</button>
+                <button type="button" class="cc-filtro" data-filtro-masc="mitico" aria-pressed="false">Mítico</button>
+            </div>
+            <div id="cc-lista-mascotes" class="cc-grid-cards"></div>
+        </section>
+
+        <!-- 17. Caixas & Fusão de Repetidos -->
+        <section id="aba-caixas" role="tabpanel" aria-labelledby="tab-caixas" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Caixas de Surpresa, Pity Timer & Fusão</h2>
+            <p class="cc-texto">Abra caixas para ganhar rostos, cabelos, chapéus, camisas, calças, fundos e <strong>Mascotes da Cozinha</strong> de todas as raridades!</p>
+            <p id="cc-colecao" class="cc-texto cc-destaque"></p>
+
+            <!-- Pity Timer & Fusão de Repetidos -->
+            <div class="cc-fusao-box">
+                <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px;">
+                    <div>
+                        <h3 style="margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> Forja de Fusão & Proteção Pity</h3>
+                        <p id="cc-pity-status" class="cc-texto" style="margin:4px 0 0;"></p>
+                    </div>
+                    <button type="button" id="cc-btn-fundir" class="cc-btn cc-btn-ouro" disabled>
+                        <i class="fa-solid fa-fire"></i> Fundir 5 Fragmentos (Item Novo Garantido) <span class="cc-kbd">F</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="cc-lista-caixas" class="cc-grade-caixas"></div>
+        </section>
+
+        <!-- ==================== GRUPO: SISTEMA ==================== -->
+
+        <!-- 18. Ajuda, Atalhos & Patch Notes -->
+        <section id="aba-ajuda" role="tabpanel" aria-labelledby="tab-ajuda" class="cc-painel" hidden>
+            <h2 class="titulo-pagina">Central de Ajuda, Atalhos & Patch Notes</h2>
+
+            <div class="cc-sub-abas" role="tablist" aria-label="Sub-abas da Ajuda">
+                <button type="button" role="tab" id="subtab-guia" class="cc-sub-aba" aria-controls="subpainel-guia" aria-selected="true">
+                    <i class="fa-solid fa-book"></i> Guia, Atalhos & Save
+                </button>
+                <button type="button" role="tab" id="subtab-patchnotes" class="cc-sub-aba" aria-controls="subpainel-patchnotes" aria-selected="false">
+                    <i class="fa-solid fa-code-branch"></i> Patch Notes (v9.0, v8.0 e v7.0)
+                </button>
+            </div>
+
+            <!-- Sub-aba 1: Guia Organizado em Acordeões, Atalhos e Save -->
+            <div id="subpainel-guia" role="tabpanel" aria-labelledby="subtab-guia">
+
+                <details class="cc-recolhivel" open>
+                    <summary><i class="fa-solid fa-compass"></i> Novidades & Como Jogar (v9.0)</summary>
+                    <ol class="cc-passos" style="margin-top:10px;">
+                        <li><strong>Pity Timer & Fusão de Repetidos (v9.0):</strong> Cada item repetido gera 1 Fragmento de Fusão (além de moedas). Ao juntar 5 fragmentos, você pode forjar um item ou mascote inédito garantido! Além disso, o Pity Timer garante um item Raro ou superior a cada 15 caixas sem sorte.</li>
+                        <li><strong>Auto-compra & Melhor Retorno (v9.0):</strong> Ative a <em>Auto-compra Inteligente</em> ou use o botão <em>Comprar Mais Barata</em> (atalho <code>V</code>). As melhorias também exibem o selo <code>★ Vale a pena</code> indicando o melhor retorno por moeda.</li>
+                        <li><strong>3 Missões Diárias & Loja Rotativa (v9.0):</strong> Conclua até 3 missões diárias para bônus extras e confira 2 itens exclusivos na <em>Vitrine Diária Rotativa</em> dentro da aba Meu Chef.</li>
+                        <li><strong>Eventos Aleatórios na Cozinha (v9.0):</strong> Fique atento às visitas de influenciadores, inspeções e picos de movimento para fazer escolhas rápidas e lucrativas.</li>
+                        <li><strong>Mascotes & Franquias Globais:</strong> Colecione 12 mascotes originais de todas as raridades e expanda suas franquias internacionais no endgame.</li>
+                    </ol>
+                </details>
+
+                <details class="cc-recolhivel" open>
+                    <summary><i class="fa-solid fa-keyboard"></i> Atalhos de Teclado (Computador)</summary>
+                    <div class="cc-rolagem" style="margin-top:10px;">
+                        <table class="cc-tabela">
+                            <thead>
+                                <tr><th>Tecla</th><th>Ação no Jogo</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><span class="cc-kbd">Espaço</span> ou <span class="cc-kbd">C</span></td><td>Cozinhar (prepara o prato atual e ganha moedas)</td></tr>
+                                <tr><td><span class="cc-kbd">V</span></td><td>Comprar instantaneamente a melhoria mais barata</td></tr>
+                                <tr><td><span class="cc-kbd">A</span></td><td>Ligar ou desligar a Auto-compra Inteligente</td></tr>
+                                <tr><td><span class="cc-kbd">F</span></td><td>Fundir 5 fragmentos repetidos na aba Caixas</td></tr>
+                                <tr><td><span class="cc-kbd">R</span></td><td>Ativar Pedido Relâmpago (3x no próximo toque)</td></tr>
+                                <tr><td><span class="cc-kbd">P</span></td><td>Abrir Minigame Ponto da Carne (5x)</td></tr>
+                                <tr><td><span class="cc-kbd">B</span></td><td>Desafiar Crítico Gastronômico (Boss Fight)</td></tr>
+                                <tr><td><span class="cc-kbd">N</span></td><td>Receber Novo Cliente no Salão</td></tr>
+                                <tr><td><span class="cc-kbd">M</span></td><td>Alternar modo de compra para Máximo (MAX) nas melhorias</td></tr>
+                                <tr><td><span class="cc-kbd">1</span> a <span class="cc-kbd">5</span></td><td>Alternar rapidamente entre as 5 categorias de menu</td></tr>
+                                <tr><td><span class="cc-kbd">Esc</span></td><td>Fechar janelas e modais abertos</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <details class="cc-recolhivel">
+                    <summary><i class="fa-solid fa-gem"></i> Tabela de Raridades, Chances & Bônus</summary>
+                    <div id="cc-tabela-raridades" class="cc-rolagem" style="margin-top:10px;"></div>
+                </details>
+
+                <details class="cc-recolhivel">
+                    <summary><i class="fa-solid fa-floppy-disk"></i> Exportar, Importar Save & Backup</summary>
+                    <div class="cc-save-box" style="margin-top:10px;">
+                        <p class="cc-texto" style="margin-top:0;">Gere um código de segurança do seu restaurante para guardar ou transferir seu progresso (100% compatível com saves anteriores).</p>
+                        <label for="cc-save-texto" style="font-weight:700; display:block;">Código do Save (Base64 / JSON):</label>
+                        <textarea id="cc-save-texto" class="cc-save-textarea" placeholder="Clique em 'Exportar e Copiar Save' para obter seu código..."></textarea>
+                        <div class="cc-save-acoes">
+                            <button type="button" id="cc-btn-exportar" class="cc-btn">
+                                <i class="fa-solid fa-file-export"></i> Exportar e Copiar Save
+                            </button>
+                            <button type="button" id="cc-btn-baixar-save" class="cc-btn cc-btn-claro">
+                                <i class="fa-solid fa-download"></i> Baixar Arquivo (.txt)
+                            </button>
+                            <button type="button" id="cc-btn-importar" class="cc-btn cc-btn-ouro">
+                                <i class="fa-solid fa-file-import"></i> Importar Save Colado
+                            </button>
+                            <button type="button" id="cc-btn-restaurar-backup" class="cc-btn cc-btn-claro">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Restaurar Backup Anterior
+                            </button>
+                        </div>
+                        <p id="cc-save-status" class="cc-texto cc-destaque" style="margin-top:10px; margin-bottom:0;"></p>
+                    </div>
+                </details>
+
+                <details class="cc-recolhivel">
+                    <summary><i class="fa-solid fa-triangle-exclamation"></i> Zona de Reinicialização</summary>
+                    <div style="margin-top:10px;">
+                        <p class="cc-texto">Apaga todos os dados salvos neste navegador.</p>
+                        <button type="button" id="cc-resetar" class="cc-btn cc-btn-perigo">Apagar meu progresso</button>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Sub-aba 2: Patch Notes (v9.0, v8.0 e v7.0 preservadas) -->
+            <div id="subpainel-patchnotes" role="tabpanel" aria-labelledby="subtab-patchnotes" hidden>
+
+                <!-- PATCH NOTES v9.0 -->
+                <div class="cc-patch-card" style="border-color:var(--estrela); background:var(--prestigio-bg);">
+                    <h3><i class="fa-solid fa-sparkles"></i> Notas da Atualização — Versão 9.0 (Atual)</h3>
+                    <p class="cc-texto">A atualização <strong>v9.0</strong> traz sistemas de proteção e progressão justa nas caixas, automação inteligente, mais variedade de receitas e conquistas, eventos dinâmicos e uma identidade visual 100% original para todos os mascotes e conjuntos.</p>
+                    <ul class="cc-patch-lista">
+                        <li><strong>Pity Timer & Fusão de Repetidos nas Caixas:</strong> A cada 15 caixas abertas sem obter um item Raro ou superior, o próximo sorteio garante raridade elevada. Além disso, itens repetidos geram <em>Fragmentos de Fusão</em>: junte 5 fragmentos para forjar um item ou mascote inédito garantido (atalho <code>F</code>).</li>
+                        <li><strong>Tutorial Inicial Guiado:</strong> Novo guia interativo de 4 etapas na primeira partida para apresentar os fundamentos sem atrapalhar quem já conhece o jogo.</li>
+                        <li><strong>3 Missões Diárias & Vitrine Diária Rotativa:</strong> O sistema diário agora conta com 3 missões independentes (toques, receitas e clientes) e uma loja diária com 2 itens visuais ou mascotes disponíveis para compra direta por moedas.</li>
+                        <li><strong>Auto-compra Inteligente & Selo "Vale a Pena?":</strong> Nova opção para automatizar a compra da melhoria mais barata a cada segundo (atalho <code>A</code>), botão dedicado de compra rápida (atalho <code>V</code>) e indicador visual automático de melhor retorno por moeda gasta.</li>
+                        <li><strong>Eventos Aleatórios na Cozinha:</strong> Visitas surpresa de influenciadores, inspeções sanitárias e picos de movimento com escolhas rápidas de 2 opções.</li>
+                        <li><strong>Expansão de Conteúdo & Estatísticas:</strong> Adicionados novos pratos ao cardápio (totalizando 18 receitas), 3 novos capítulos na história do restaurante, 36 conquistas e gráfico visual de evolução de produção na aba Estatísticas.</li>
+                        <li><strong>Mascotes & Conjuntos 100% Originais + Correções:</strong> Todos os 12 mascotes e conjuntos foram redesenhados com temáticas culinárias originais; corrigidos bugs de cálculo no teto de combo da Lanchonete Premium e cobrança em modo livre.</li>
+                    </ul>
+                </div>
+
+                <!-- PATCH NOTES v8.0 -->
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-rocket"></i> Notas da Atualização — Versão 8.0</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>12 Mascotes da Cozinha (Todas as Raridades):</strong> 2 mascotes por raridade (Comum a Mítico) com ilustrações vetoriais exclusivas e bônus de coleção e equipamento no salão.</li>
+                        <li><strong>Franquias Globais (Endgame):</strong> 6 franquias internacionais e interplanetárias desbloqueadas no Império Gastronômico com progressão contínua.</li>
+                        <li><strong>Compra Máxima (MAX) nas Melhorias:</strong> Filtro <code>Máximo (MAX)</code> e botão individual de compra máxima em cada melhoria.</li>
+                        <li><strong>Atalhos de Teclado Completos:</strong> Cozinhe, ative habilidades, navegue entre categorias e compre melhorias sem tirar as mãos do teclado.</li>
+                        <li><strong>Correções de Bugs & Polimento Mobile:</strong> Corrigidos bug de duplo disparo na tecla Espaço, sincronia da barra mobile, cálculo de progresso de temporada e espaçamento responsivo.</li>
+                    </ul>
+                </div>
+
+                <!-- PATCH NOTES v7.0 -->
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-rocket"></i> Notas da Atualização — Versão 7.0 (De v6.0 para v7.0)</h3>
+                    <p class="cc-texto">A atualização <strong>v7.0</strong> transforma o Cozinha do Chef em uma experiência de gestão gastronômica viva, com reorganização completa da interface para computador e celular, clientes dinâmicos, campeonatos, fornecedores, decoração independente e muito mais.</p>
+                </div>
+
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-compass-drafting"></i> 1. Reorganização da Interface, Responsividade & Acessibilidade (v7.0)</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>Agrupamento Hierárquico de Menus:</strong> As abas são organizadas em 5 grupos expansíveis (<em>Jogar, Gerenciar, Progressão, Coleção e Sistema</em>), reduzindo a poluição visual e mantendo o foco na tela ativa.</li>
+                        <li><strong>Navegação Mobile Dedicada:</strong> Barra inferior fixa para telas estreitas com acesso rápido aos principais destinos e suporte à área segura (<em>safe-area</em>) de dispositivos móveis.</li>
+                        <li><strong>Painéis Recolhíveis & Busca:</strong> Informações secundárias organizadas em painéis recolhíveis (<code>&lt;details&gt;</code>) com pesquisa e filtros em receitas e conquistas.</li>
+                        <li><strong>Acessibilidade & Controle de Efeitos:</strong> Botão no cabeçalho para ativar/desativar animações e efeitos visuais, foco visível por teclado e fechamento de modais com <code>Escape</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-people-group"></i> 2. Sistema de Clientes Vivos no Salão (v7.0)</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>6 Perfis de Clientes:</strong> <em>Cliente Comum</em>, <em>Cliente Exigente</em>, <em>Cliente Apressado</em>, <em>Cliente VIP</em>, <em>Cliente Recorrente</em> e <em>Crítico Gastronômico</em>.</li>
+                        <li><strong>Preferências, Paciência & Atendimento Automático:</strong> Cada cliente pede um prato específico e possui barra de paciência. Garçons contratados atendem clientes automaticamente.</li>
+                    </ul>
+                </div>
+
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-clipboard-check"></i> 3. Pedidos Especiais (Bronze/Prata/Ouro), Diários & Modo Desafio (v7.0)</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>Pedidos Especiais com 3 Níveis de Avaliação:</strong> Cumpra metas específicas e resgate recompensas em nível <strong>Bronze</strong>, <strong>Prata</strong> ou <strong>Ouro</strong>.</li>
+                        <li><strong>Modo Desafio Cronometrado:</strong> Partidas especiais de 60 segundos com modificadores e livro de recordes próprios.</li>
+                    </ul>
+                </div>
+
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-medal"></i> 4. Campeonatos & Concorrentes Gastronômicos (v7.0)</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>Campeonato Gastronômico em 3 Etapas:</strong> Dispute <em>1. Classificatórias</em>, <em>2. Semifinal</em> e <em>3. Final</em> para conquistar troféus e multiplicadores permanentes.</li>
+                        <li><strong>Concorrentes Gastronômicos (Rivais):</strong> Enfrente restaurantes rivais em duelos diretos por reputação e prêmios.</li>
+                    </ul>
+                </div>
+
+                <div class="cc-patch-card">
+                    <h3><i class="fa-solid fa-store"></i> 5. Especialização, Decoração, Equipamentos & Fornecedores (v7.0)</h3>
+                    <ul class="cc-patch-lista">
+                        <li><strong>Especializações Gastronômicas & Decoração Livre:</strong> Escolha sua vocação a partir da Lanchonete Fixa e alterne temas visuais do salão livremente.</li>
+                        <li><strong>Equipamentos Aprimoráveis, Fornecedores & Sinergias de Equipe:</strong> Evolua fogão, forno, geladeira, bancada e utensílios, compre insumos frescos e combine cargos na brigada.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior Mobile -->
+    <nav class="cc-mobile-bar" aria-label="Atalhos mobile">
+        <button type="button" class="cc-mob-btn ativo" data-mob-aba="cozinhar">
+            <i class="fa-solid fa-bowl-food"></i><span>Cozinhar</span>
+        </button>
+        <button type="button" class="cc-mob-btn" data-mob-aba="melhorias">
+            <i class="fa-solid fa-arrow-trend-up"></i><span>Melhorias</span>
+        </button>
+        <button type="button" class="cc-mob-btn" data-mob-aba="franquias">
+            <i class="fa-solid fa-earth-americas"></i><span>Franquias</span>
+        </button>
+        <button type="button" class="cc-mob-btn" data-mob-aba="mascotes">
+            <i class="fa-solid fa-paw"></i><span>Mascotes</span>
+        </button>
+        <button type="button" class="cc-mob-btn" data-mob-aba="ajuda">
+            <i class="fa-solid fa-circle-question"></i><span>Ajuda</span>
+        </button>
+    </nav>
+
+    <!-- Notificação -->
+    <div id="cc-toast" class="cc-toast" role="status" aria-live="polite" hidden></div>
+
+    <!-- Modal -->
+    <div id="cc-modal" class="cc-modal" hidden>
+        <div class="cc-modal-caixa" role="dialog" aria-modal="true" aria-labelledby="cc-modal-titulo">
+            <h2 id="cc-modal-titulo"></h2>
+            <div id="cc-modal-corpo"></div>
+            <button type="button" id="cc-modal-fechar" class="cc-btn">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Debug -->
+    <aside id="cc-debug" class="cc-debug" aria-label="Painel de depuração" hidden>
+        <h2>Depuração v9.0</h2>
+        <button type="button" data-dbg="tudo" id="cc-debug-fechar-foco">Liberar tudo</button>
+        <button type="button" data-dbg="bloquear">Desfazer liberação</button>
+        <button type="button" data-dbg="moedas">+100 bilhões de moedas</button>
+        <button type="button" data-dbg="estrelas">+500 Estrelas Prestígio</button>
+        <button type="button" data-dbg="reputacao">Reputação 5.0 ★</button>
+        <button type="button" data-dbg="ingredientes">+50 de cada Ingrediente</button>
+        <button type="button" data-dbg="fragmentos">+15 Fragmentos de Fusão</button>
+        <button type="button" data-dbg="dourado">Invocar Ingrediente Dourado</button>
+        <button type="button" data-dbg="maximizar">Melhorias no máximo</button>
+        <button type="button" data-dbg="caixas">Abrir 10 caixas do Chef (grátis)</button>
+        <button type="button" data-dbg="token">Dar o Token Dourado</button>
+        <button type="button" data-dbg="resetar">Apagar progresso</button>
+        <button type="button" data-dbg="fechar" id="cc-debug-fechar">Fechar painel</button>
+    </aside>
+
+    <script src="game.js"></script>
+</body>
+</html>
